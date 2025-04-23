@@ -1,0 +1,186 @@
+.hero-sec {
+    padding: clamp(60px, 5vw, 100px) 0;
+    height: calc(100vh - 102px);
+    max-height: 892px;
+    min-height: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-image: url("./../../assets/img/hero-bg-overlay.webp");
+        z-index: 1;
+        background-size: cover;
+        background-position: center;
+    }
+    > div {
+        position: relative;
+        z-index: 2;
+    }
+    .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+.half-sec {
+    &.content-right {
+        .content-wrapper {
+            padding-left: 30px;
+        }
+    }
+    
+    &.content-left {
+        .content-wrapper {
+            padding-right: 30px;
+        }
+    }
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+    }
+    .img-wrapper {
+        .sec-img {
+            max-width: 558px;
+        }
+    }
+}
+.brand-sec {
+    padding: clamp(30px, 4vw, 50px) 0;
+    .slider-wrapper {
+        width: 100vw;
+        .slider-track {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            min-width: fit-content;
+            min-width: min-content;
+            animation: brandxanim 26s infinite linear alternate-reverse;
+
+            &.anim-inverse {
+                transform: translateX(calc(-100% + 100vw));
+                animation: brandxaniminverse 26s infinite linear alternate-reverse;
+
+                @keyframes brandxaniminverse {
+                    from {
+                        transform: translateX(calc(-100% + 100vw));
+                    }
+
+                    to {
+                        transform: translateX(0);
+                    }
+                }
+            }
+
+            @keyframes brandxanim {
+                from {
+                    transform: translateX(0);
+                }
+
+                to {
+                    transform: translateX(calc(-100% + 100vw));
+                }
+            }
+            .slider-item {
+                min-width: 186px;
+                height: 84px;
+                background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .half-sec {
+        &.content-right {
+            .content-wrapper {
+                padding-left: 0;
+            }
+        }
+
+        &.content-left {
+            .content-wrapper {
+                padding-right: 0;
+            }
+        }
+
+        .img-wrapper {
+            max-width: fit-content;
+            margin: auto;
+
+            .sec-img {
+                max-width: 340px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .line-obj {
+                svg {
+                    width: 220px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-sec {
+        max-height: 500px;
+    }
+
+    .half-sec {
+        &.content-right {
+            .line-obj {
+                left: -100px;
+            }
+        }
+
+        &.content-left {
+            .line-obj {
+                right: -100px;
+            }
+        }
+
+        .img-wrapper {
+            .line-obj {
+                svg {
+                    width: 180px;
+                }
+            }
+        }
+    }
+    .brand-sec {
+        .slider-wrapper {
+            .slider-track {
+                gap: 20px;
+                .slider-item {
+                    min-width: 140px;
+                    height: 60px;
+                    img {
+                        max-height: 50%;
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+}
