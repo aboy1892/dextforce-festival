@@ -51,24 +51,6 @@
 
 @media (max-width: 576px) {
   .btn {
-    padding: 16px 20px;
-    &.no-arrow {
-      padding: 16px 20px;
-    }
-    &::before {
-      right: 12px;
-    }
-  }
-}
-
-@media (max-width: 425px) {
-  .btn {
-    padding: 14px 18px;
-    &.no-arrow {
-      padding: 14px 18px;
-      &::before {
-        display: none;
-      }
-    }
+    padding: 20px 24px;
   }
 }

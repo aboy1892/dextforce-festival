@@ -163,7 +163,7 @@
 
 .banner-sec {
   position: relative;
-  padding: clamp(50px, 10vw, 140px) 0 !important;
+  padding: clamp(50px, 10vw, 140px) 0;
   min-height: min-content;
   display: flex;
   flex-direction: column;
@@ -200,7 +200,7 @@
   }
 }
 .image-mrquee-wrapper {
-  padding: 100px 0 0;
+  padding: 80px 0 0;
   position: relative;
   &.banner-marquee {
     .image-marquee-item {
