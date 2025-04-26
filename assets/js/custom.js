@@ -1,10 +1,10 @@
-// document.querySelectorAll('.particle-container').forEach(function (container) {
-
-// });
-
-
 jQuery(document).ready(function () {
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
+  let smoother = ScrollSmoother.create({
+    smooth: 1, // seconds it takes to "catch up" to native scroll position
+    effects: true, // look for data-speed and data-lag attributes on elements and animate accordingly
+  });
   const menu = $(".menu-wrapper");
   const hamburgerMenu = $(".hamburger-menu");
 
@@ -26,144 +26,145 @@ jQuery(document).ready(function () {
     });
   }
 
+  // accordions start
+  var accordionItems = $(".accordion-item");
+  accordionItems.each(function () {
+    var header = $(this).find(".accordion-header");
+    var content = $(this).find(".accordion-content");
 
-  var animationStarted = false;
+    header.on("click", function () {
+      var isActive = $(this).parent().hasClass("active");
 
-  function isElementInViewport(el) {
-    var rect = el.get(0).getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || $(window).height()) &&
-      rect.right <= (window.innerWidth || $(window).width())
-    );
-  }
+      // Close all content sections
+      accordionItems.removeClass("active");
+      accordionItems.find(".accordion-content").removeClass("show");
 
-  function animateValue($element, start, end, duration) {
-    var current = start;
-    var increment = 1; // Increment by 1
-    var stepTime = Math.abs(Math.floor(duration / (end - start))); // Calculate step time
-
-    var timer = setInterval(function () {
-      current += increment;
-      if (current >= end) {
-        current = end;
-        clearInterval(timer);
-      }
-      $element.text(current + "%"); // Update the element text directly
-    }, stepTime);
-  }
-
-  function startCounterAnimation() {
-    if (!animationStarted) {
-      $('.counter').each(function () {
-        var target = parseInt($(this).attr('data-target'));
-        animateValue($(this), 0, target, 2000);
-      });
-      animationStarted = true;
-    }
-  }
-
-  $(window).on('scroll', function () {
-    $('.counter').each(function () {
-      if (isElementInViewport($(this))) {
-        startCounterAnimation();
+      // Toggle active class and show content
+      if (!isActive) {
+        $(this).parent().addClass("active");
+        content.addClass("show");
       }
     });
   });
-
-
-  $('.logo-slider').slick({
-    autoplay: true,
-    autoplaySpeed: 0,
-    speed: 5000,
-    arrows: false,
-    swipe: false,
-    slidesToShow: 6,
-    cssEase: 'linear',
-    pauseOnFocus: false,
-    pauseOnHover: false,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 5,
-        }
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 4,
-        }
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 3,
-        }
-      },
-      {
-        breakpoint: 425,
-        settings: {
-          slidesToShow: 2,
-        }
-      }
-    ]
-  });
-  $('.testimonial-slider').slick({
-    autoplay: true,
-    slidesToShow: 1,
-    slideToScroll: 1,
-    arrows: true,
-    dots: false
-  });
-
-  $('.alert-slider').slick({
-    autoplay: true,
-    slidesToShow: 1,
-    slideToScroll: 1,
-    arrows: false,
-    dots: false
-  });
-
-  $(".nav-link").on("click", function (e) {
-    e.preventDefault();
-
-    // Remove active class from all tabs and contents
-    $(".nav-link").removeClass("active");
-    $(".tab-pane").removeClass("active");
-
-    // Add active class to the clicked tab and corresponding content
-    $(this).addClass("active");
-    const target = $(this).attr("href");
-    $(target).addClass("active");
-  });
+  // accordions end
 
   // modal satrt
-  $('[data-target]').click(function () {
-    const targetModal = $(this).data('target'); // Get the target modal from data-target attribute
-    $(targetModal).addClass('fade show'); // Show the targeted modal
+  $("[data-target]").click(function () {
+    const targetModal = $(this).data("target"); // Get the target modal from data-target attribute
+    $(targetModal).addClass("fade show"); // Show the targeted modal
   });
 
   // Close modal when the 'x' is clicked
-  $('.close-modal').click(function () {
-    $(this).closest('.modal').removeClass('fade show'); // Close the closest modal
+  $(".close-modal").click(function () {
+    $(this).closest(".modal").removeClass("fade show"); // Close the closest modal
   });
-
 
   // Close modal if clicked outside the modal content
   $(window).click(function (event) {
-    if ($(event.target).is('.modal')) {
-      $(event.target).removeClass('fade show'); // Close the modal if the overlay is clicked
+    if ($(event.target).is(".modal")) {
+      $(event.target).removeClass("fade show"); // Close the modal if the overlay is clicked
     }
   });
 
-  $('.passwordToggler').on('click', function () {
-    let passInput = $(this).siblings('input[type="password"], input[type="text"]');
-    if (passInput.attr('type') === 'password') {
-        passInput.attr('type', 'text');
-    } else {
-        passInput.attr('type', 'password');
+  gsap.from(".img-wrapper", {
+    y: 50,
+    duration: 0.3,
+    ease: "Power4.out",
+    scrollTrigger: {
+      trigger: ".img-wrapper",
+      scrub: 1,
+      // start: "top center"
+    },
+    stagger: true,
+  });
+
+  // mqrquee start
+  var imagexMovement;
+  if (window.innerWidth <= 992) {
+    var imagexMovement = -900;
+  } else {
+    var imagexMovement = -1550;
+  }
+  gsap.fromTo(
+    ".image-marquee.right-left",
+    {
+      x: 0,
+      duration: 25,
+      ease: "linear",
+    },
+    {
+      x: imagexMovement,
+      duration: 25,
+      ease: "linear",
+      repeat: -1,
     }
-});
+  );
+  gsap.fromTo(
+    ".image-marquee.left-right",
+    {
+      x: imagexMovement,
+      duration: 25,
+      ease: "linear",
+    },
+    {
+      x: 0,
+      duration: 25,
+      ease: "linear",
+      repeat: -1,
+    }
+  );
+  // Animate all elements with class 'clockwise'
+  gsap.utils.toArray(".image-marquee-item.clockwise").forEach((elem) => {
+    const parentElem = elem.parentNode;
+    gsap.from(elem, {
+      rotation: 6,
+      ease: "Power3.out",
+      duration: 0.2,
+      scrollTrigger: {
+        trigger: parentElem,
+        scrub: 1,
+        // Optional: you can specify start/end points if needed
+      },
+    });
+  });
+
+  // Animate all elements with class 'anticlockwise'
+  gsap.utils.toArray(".anticlockwise").forEach((elem) => {
+    const parentElem = elem.parentNode;
+    gsap.from(elem, {
+      rotation: -6,
+      ease: "Power3.out",
+      duration: 0.1,
+      scrollTrigger: {
+        trigger: parentElem, // fixed spelling
+        scrub: 1,
+      },
+    });
+  });
+
+  // marquee end
+
+  let proxy = { skew: 0 },
+    skewSetter = gsap.quickSetter(".skewElem", "skewY", "deg"), // fast
+    clamp = gsap.utils.clamp(-20, 20); // don't let the skew go beyond 20 degrees.
+
+  ScrollTrigger.create({
+    onUpdate: (self) => {
+      let skew = clamp(self.getVelocity() / -300);
+      // only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
+      if (Math.abs(skew) > Math.abs(proxy.skew)) {
+        proxy.skew = skew;
+        gsap.to(proxy, {
+          skew: 0,
+          duration: 0.8,
+          ease: "power3",
+          overwrite: true,
+          onUpdate: () => skewSetter(proxy.skew),
+        });
+      }
+    },
+  });
+
+  // make the right edge "stick" to the scroll bar. force3D: true improves performance
+  gsap.set(".skewElem", { transformOrigin: "right center", force3D: true });
 });
