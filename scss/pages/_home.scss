@@ -105,26 +105,6 @@
         }
     }
 }
-.image-mrquee-wrapper {
-    padding: 160px 0 0;
-    position: relative;
-    .image-marquee-item {
-        position: absolute;
-        top: 50%;
-        transform: translate(-50px, -50%);
-        padding: 17px;
-        width: calc(100vw + 100px);
-        transform-origin: center;
-        .image-marquee {
-            display: flex;
-            gap: 40px;
-            img {
-                min-width: 1718px;
-                height: auto;
-            }
-        }
-    }
-}
 .members-sec {
     .become-member-card {
         background-image: url("./../../assets/img/card-bg.webp");
@@ -352,18 +332,6 @@
             .line-obj {
                 svg {
                     width: 220px;
-                }
-            }
-        }
-    }
-    .image-mrquee-wrapper {
-        padding: 120px 0 0;
-        .image-marquee-item {
-            padding: 10px;
-            .image-marquee {
-                img {
-                    min-width: 900px;
-                    height: auto;
                 }
             }
         }
