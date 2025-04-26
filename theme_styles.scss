@@ -235,6 +235,61 @@
     margin-bottom: clamp(22px, 6vw, 46px);
   }
 }
+.cta-sec {
+  background-position: center;
+  background-size: cover;
+  &.cta-1 {
+      background-image: url('./../../assets/img/cta-bg-1.webp');
+      .counter-wrapper {
+          background-color: rgba(black, .17);
+          backdrop-filter: blur(20px);
+          border-radius: 5px;
+          border: 1px solid var(--primary);
+          .counts-wrapper {
+              padding: clamp(30px, 5vw, 50px) 20px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: clamp(10px, 4vw, 20px);
+              border-bottom: 1px solid var(--primary);
+              .count-item {
+                  padding: clamp(20px, 5vw, 30px) 10px;
+                  position: relative;
+                  background-color: var(--primary);
+                  border-radius: 5px;
+                  width: 100%;
+                  max-width: 124px;
+                  .custom-border {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      bottom: 0;
+                      border-radius: 5px;
+                      border: 1px solid rgba(0,0,0,0);
+                      background: linear-gradient(-30deg, rgba(#fff, 0) 0%, rgba(#fff, .3) 100%) border-box;
+                      -webkit-mask: linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+                      -webkit-mask-composite: destination-out;
+                      mask-composite: exclude;
+                      z-index: 0;
+                      transition: .3s
+                  }
+                  .count {
+                      font-size: clamp(30px, 5vw, 46px);
+                      font-weight: bold;
+                      line-height: 1;
+                  }
+              }
+          }
+          .info-wrapper {
+              padding: 20px clamp(20px, 4vw, 30px);
+          }
+      }
+  }
+  &.cta-2 {
+    background-image: url('./../../assets/img/cta-bg-2.webp');
+  }
+}
 .main-title {
   position: relative;
   z-index: 1;
