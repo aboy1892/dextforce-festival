@@ -507,3 +507,15 @@
     }
   }
 }
+@media (max-width: 577px) {
+  .cta-sec {
+    &.cta-2 {
+      .btn {
+        text-transform: lowercase;
+        img {
+          display: none;
+        }
+      }
+    }
+  }
+}
